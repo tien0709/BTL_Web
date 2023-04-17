@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="jp">
+    <head>
+
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
+        <link rel="stylesheet" type="text/css" href=".\CSS\UI__styles.css"> <!-- For PC & Tablet -->
+        <link rel="stylesheet" type="text/css" href=".\CSS\globals.css">
+        <link rel="stylesheet" type="text/css" href=".\CSS\UI__mb.css"> <!-- For mobiles -->
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <title>Bài viết</title>
+        <link rel="stylesheet" href="./icon/fontawesome-free-6.2.0-web/css/all.min.css">
+        <link
+        rel="stylesheet"
+        type="text/css"
+        href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
+        />
+        <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+        
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://kit.fontawesome.com/e26d989c97.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="./css/main.css">
+        <link rel="stylesheet" href="./css/base.css">
+        <link rel="stylesheet" href="./css/responsive.css">
+        
+    </head>
+    <body>
+        <header class="header" style="z-index: 999">
+            <div class="container">
+                <div class="header-wrap fl" style="height: 64px">
+                    <div class="header-bar">
+                        <i class="fa-solid fa-bars"></i>
+                    </div>
+                    <div class="over_lay" style="z-index: 9999;"></div>
+                    <div class="navbar__mb">
+                        <ul class="navbar__mb-list">
+                            <li> 
+                                <a href="log_in.html" class="navbar__mb-link">
+                                    <i class="fa-solid fa-right-to-bracket minwidth25px"></i>
+                                    Đăng nhập
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="navbar__mb-list ">
+                            <li> 
+                                <a href="" class="navbar__mb-link">
+                                    <i class="fa-solid fa-house minwidth25px"></i>                                
+                                    Trang chủ
+                                </a>
+                            </li>
+                            <li> <a href="" class="navbar__mb-link">
+                                <i class="fa-solid fa-circle-info minwidth25px"></i>
+                                Giới thiệu
+                            </a>
+                            </li>
+                            <li> 
+                                <a href="" class="navbar__mb-link">
+                                    <i class="fa-solid fa-shop minwidth25px"></i>
+                                    Cửa hàng
+                                </a>
+                            </li>
+                            <li> 
+                                <a href="" class="navbar__mb-link">
+                                    <i class="fa-solid fa-newspaper minwidth25px"></i>
+                                    Tin tức
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="header_left fl">
+                        <div class="header__logo">
+                            <img src="./img/lntt.png" alt="" class="logo-img">
+                        </div>
+                        <ul class="header__list">
+                            <li class="header__item"><a href="" class="header__item-link">Trang chủ</a></li>
+                            <li class="header__item"><a href="" class="header__item-link">Giới thiệu</a></li>
+                            <li class="header__item"><a href="" class="header__item-link">Cửa hàng</a></li>
+                            <li class="header__item"><a href="" class="header__item-link">Tin tức</a></li>
+                        </ul>
+                    </div>
+                   <div class="header_right fl">
+                        <div class="header__search">
+                            <form action="" class="search-bar">
+                                <input type="search" name="search" class="header__search-input" placeholder="Nhập tên sản phẩm...">
+                                <span class="search-btn">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                </span>
+                            </form>
+                        </div>
+                        <div class="header__notification">
+                            <i class="fa-solid fa-bell"></i>
+                        </div>
+                        <div class="header__shoppingCard">
+                            <i class="fa-solid fa-cart-shopping header__shoppingCard-icon"></i>
+                        </div>
+                        <div class="header__user">
+                            <i class="fa-sharp fa-solid fa-user"></i>
+                            <div class="header__user-log">
+                                <ul class="user-log-list">
+                                    <li class="user-log-item"><a href="" class="text-dark">Tạo tài khoản ngay</a> </li>
+                                    <li class="user-log-item border_tb"><a href="log_in.html" class="text-dark" target="_blank">Đăng nhập</a></li>
+                                    <li class="user-log-item"><a href="" class="text-dark">Ngôn ngữ</a> </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="header-searchMobile">
+                            <i class="header-searchMobile__icon fa-solid fa-magnifying-glass"></i>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </header>
+            
+
+            <body>
+                <div class="list-product__respon-wrap" style="z-index: 9999;">
+                    <ul class="list-product__respon">
+                        <li class="item-product__respon">
+                            <a href="" class="item-product__respon-link">Lenovo</a>
+                        </li>
+                        <li class="item-product__respon">
+                            <a href="" class="item-product__respon-link">Asus</a>
+                        </li>
+                        <li class="item-product__respon">
+                            <a href="" class="item-product__respon-link">Macbook</a>
+                        </li>
+                        <li class="item-product__respon">
+                            <a href="" class="item-product__respon-link">HP</a>
+                        </li>
+                        <li class="item-product__respon">
+                            <a href="" class="item-product__respon-link">MSI</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="slider">
+                    <div class="slider-item"> 
+                        <div class="slider-img">
+                            <a href="#"><img src="./img/Slider/banner 8.webp" alt=""></a>
+                        </div>
+                    </div>
+                    <div class="slider-item"> 
+                        <div class="slider-img">
+                            <a href="#"><img src="./img/Slider/banner ipad gen 9 PC-2.webp" alt=""></a>
+                        </div>
+                    </div>
+                    <div class="slider-item"> 
+                        <div class="slider-img">
+                            <a href="#"><img src="./img/Slider/Banner PC.webp" alt=""></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="slider slider_mb">
+                    <div class="slider-item"> 
+                        <div class="slider-img">
+                            <a href="#"><img src="./img/Slider/0012058_Banner MB (3).webp" alt=""></a>
+                        </div>
+                    </div>
+                    <div class="slider-item"> 
+                        <div class="slider-img">
+                            <a href="#"><img src="./img/Slider/Banner MB.webp" alt=""></a>
+                        </div>
+                    </div>
+                    <div class="slider-item"> 
+                        <div class="slider-img">
+                            <a href="#"><img src="./img/Slider/0012077_banner 8.webp" alt=""></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="post__content">
+                    <div class="container tablet-pl-18 tablet-pr-18">
+                        <div class="body__content--blog">
+                            <div class="body__content--blog__post">
+                                <div class="link__nav">
+                                    <a href="https://voyager-hcm.com/" target="_blank">Trang chủ</a> >
+                                    <a href="./UI__blog-v2.0.html" target="_blank">Tin tức</a> >
+                                    <span>IT Outsourcing Ultimate Guide: Definition, Types & Models, And Trends To Look Out for in 2023</span>
+                                </div>
+                                <div class="post__detail">
+                                    <a class="body__banner--info__link" href="/">News</a>
+                                    <h1>IT Outsourcing Ultimate Guide: Definition, Types & Models, And Trends To Look Out for in 2023</h1>
+                                    <img src=".\img\voice_2 1.svg">
+                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum....</p>
+                                    <h5>Lorem Ipsum</h5>
+                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum....</p>
+                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum....</p>
+                                    <h5>Lorem Ipsum</h5>
+                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum....</p>
+                                </div>
+                            </div>
+                            <div class="body__content--blog__nav  no-mr">
+                                <div class="poll">
+                                    <label>Tin tức nổi bật</label>
+                                    <div class="poll__article">
+                                        <div class="poll__left-container">
+                                            <a href="/" class="image-link"><img src=".\img\Rectangle 8.svg"></a>
+                                        </div>
+                                        <div class="poll__right-container">
+                                            <a href="/" class="poll__article--link"><span>Software Development</span></a>
+                                            <label>2023.01.17</label>
+                                            <h6><a href="/">AWS Amplify — 3分でわかる静的ウェブホスティング</a></h6>
+                                        </div>
+                                    </div>
+                                    <div class="poll__article">
+                                        <div class="poll__left-container">
+                                            <a href="/" class="image-link"><img src=".\img\Rectangle 8.svg"></a>
+                                        </div>
+                                        <div class="poll__right-container">
+                                            <a href="/" class="poll__article--link"><span>News</span></a>
+                                            <label>2023.01.17</label>
+                                            <h6><a href="/">AWS Amplify — 3分でわかる静的ウェブホスティング</a></h6>
+                                        </div>
+                                    </div>
+                                    <div class="poll__article">
+                                        <div class="poll__left-container">
+                                            <a href="/" class="image-link"><img src=".\img\Rectangle 8.svg"></a>
+                                        </div>
+                                        <div class="poll__right-container">
+                                            <a href="/" class="poll__article--link"><span>Events</span></a>
+                                            <label>2023.01.17</label>
+                                            <h6><a href="/">AWS Amplify — 3分でわかる静的ウェブホスティング</a></h6>
+                                        </div>
+                                    </div>
+                                    <div class="poll__article">
+                                        <div class="poll__left-container">
+                                            <a href="/" class="image-link"><img src=".\img\Rectangle 8.svg"></a>
+                                        </div>
+                                        <div class="poll__right-container">
+                                            <a href="/" class="poll__article--link"><span>Events</span></a>
+                                            <label>2023.01.17</label>
+                                            <h6><a href="/">AWS Amplify — 3分でわかる静的ウェブホスティング</a></h6>
+                                        </div>
+                                    </div>
+                                    <div class="mt-25">
+                                        <label class="font-700 fszie-18">Tags</label>
+                                    </div>
+                                    <div class="poll__tag flex flex-wrap mt-12">
+                                        <a class="poll__tag--grp" href="/" target="_blank">AI</a>
+                                        <a class="poll__tag--grp" href="/" target="_blank">Blockchain</a>
+                                        <a class="poll__tag--grp" href="/" target="_blank">Voyager</a>
+                                        <a class="poll__tag--grp" href="/" target="_blank">UI/UX</a>
+                                        <a class="poll__tag--grp" href="/" target="_blank">AWS</a>
+                                        <a class="poll__tag--grp" href="/" target="_blank">ChatGPT</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="body__content--releted">
+                    <div class="container tablet-pl-18 tablet-pr-18">
+                        <h4>Các bài viết liên quan</h4>
+                            <div class="swiper mySwiper">
+                                <div class="swiper-wrapper">
+                                  <div class="swiper-slide">
+                                    <div class="g-col-12">
+                                        <article class="blog__article">
+                                            <a href="/" class="of-hidden"><img src=".\img\case_02 1.svg"></a>
+                                            <a class="blog__article--button" href="/" target="_blank"><span>Software Development</span></a>
+                                            <label>2023.01.17</label>
+                                            <h6><a href="/">AWS Amplify — 3分でわかる静的ウェブホスティング</a></h6>
+                                        </article>
+                                    </div>
+                                  </div>
+                                  <div class="swiper-slide">
+                                    <div class="g-col-12">
+                                        <article class="blog__article">
+                                            <a href="/" class="of-hidden"><img src=".\img\case_02 1 (1).svg"></a>
+                                            <a class="blog__article--button" href="/" target="_blank"><span>News</span></a>
+                                            <label>2023.01.17</label>
+                                            <h6><a href="/">2023年のモバイルアプリトレンド予測</a></h6>
+                                        </article>
+                                    </div>
+                                  </div>
+                                  <div class="swiper-slide">
+                                    <div class="g-col-12">
+                                        <article class="blog__article">
+                                            <a href="/" class="of-hidden"><img src=".\img\case_02 1.svg"></a>
+                                            <a class="blog__article--button" href="/" target="_blank"><span>Software Development</span></a>
+                                            <label>2023.01.17</label>
+                                            <h6><a href="/">AWS Amplify — 3分でわかる静的ウェブホスティング</a></h6>
+                                        </article>
+                                    </div>
+                                  </div>
+                                  <div class="swiper-slide">
+                                    <div class="g-col-12">
+                                        <article class="blog__article">
+                                            <a href="/" class="of-hidden"><img src=".\img\case_02 1 (1).svg"></a>
+                                            <a class="blog__article--button" href="/" target="_blank"><span>News</span></a>
+                                            <label>2023.01.17</label>
+                                            <h6><a href="/">2023年のモバイルアプリトレンド予測</a></h6>
+                                        </article>
+                                    </div>
+                                  </div>
+                                  
+                                  <div class="swiper-slide">
+                                    <div class="g-col-12">
+                                        <article class="blog__article">
+                                            <a href="/" class="of-hidden"><img src=".\img\case_02 1.svg"></a>
+                                            <a class="blog__article--button" href="/" target="_blank"><span>Software Development</span></a>
+                                            <label>2023.01.17</label>
+                                            <h6><a href="/">AWS Amplify — 3分でわかる静的ウェブホスティング</a></h6>
+                                        </article>
+                                    </div>
+                                  </div>
+                                  <div class="swiper-slide">
+                                    <div class="g-col-12">
+                                    <article class="blog__article">
+                                        <a href="/" class="of-hidden"><img src=".\img\case_02 1 (1).svg"></a>
+                                        <a class="blog__article--button" href="/" target="_blank"><span>News</span></a>
+                                        <label>2023.01.17</label>
+                                        <h6><a href="/">2023年のモバイルアプリトレンド予測</a></h6>
+                                    </article>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="swiper-pagination"></div>
+                              </div>
+                            
+                        <!-- </div> -->
+                        <div class="body__content--releted__button">
+                                <a href="/" class="extend__button" target="_blank">Xem tất cả<span>></span></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="body__content--contact">
+                    <div class="tablet-pt-50 tablet-pl-18 tablet-pr-18 text-center">
+                        <div class="newsletter">
+                            <h3 class="newsletter__heading">Đăng ký nhận tin từ ...</h3>
+                            <p class="newsletter__desc">Thông tin sản phẩm mới nhất và chương trình khuyến mãi</p>
+                            <div class="newsletter__email fl">
+                                <div class="newsletter__email-wrap fl spbw">
+                                    <input type="email" placeholder="Email của bạn" class="newsletter__input">
+                                <button class="newsletter__btn" >Đăng ký</button>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <footer>
+                <div class="footer" style="height:100%; flex-direction: column">
+                    <div class="container text-center">
+                        <div class="row pd-bottom32">
+                            <div class="col-lg-3 col-md-6 col-sm-6">
+                                <h3 class="footer__heading ">Chăm sóc khách hàng</h3>
+                                <ul class="footer__list">
+                                    <li class="footer__list-item">
+                                        <a href="" class="footer__list-item-link">Trung tâm trợ giúp</a>
+                                    </li>
+                                    <li class="footer__list-item">
+                                        <a href="" class="footer__list-item-link">Hướng dẫn mua hàng</a>
+                                    </li>
+                                    <li class="footer__list-item">
+                                        <a href="" class="footer__list-item-link">Liên hệ</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-sm-6">
+                                <h3 class="footer__heading">Giới thiệu</h3>
+                                <ul class="footer__list">
+                                    <li class="footer__list-item">
+                                        <a href="" class="footer__list-item-link">Giới thiệu</a>
+                                    </li>
+                                    <li class="footer__list-item">
+                                        <a href="" class="footer__list-item-link">Tuyển dụng</a>
+                                    </li>
+                                    <li class="footer__list-item">
+                                        <a href="" class="footer__list-item-link">Điều khoản</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-sm-6">
+                                <h3 class="footer__heading">Chính sách</h3>
+                                <ul class="footer__list">
+                                    <li class="footer__list-item">
+                                        <a href="" class="footer__list-item-link">Đổi trả</a>
+                                    </li>
+                                    <li class="footer__list-item">
+                                        <a href="" class="footer__list-item-link">Giao hàng</a>
+                                    </li>
+                                    <li class="footer__list-item">
+                                        <a href="" class="footer__list-item-link">Thu cũ đổi mới</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-sm-6">
+                                <h3 class="footer__heading">Theo dõi</h3>
+                                <ul class="footer__list">
+                                    <li class="footer__list-item">
+                                        <a href="" class="footer__list-item-link">
+                                            <i class="fa-brands fa-facebook"></i>
+                                            Facebook
+                                        </a>
+                                    </li>
+                                    <li class="footer__list-item">
+                                        <a href="" class="footer__list-item-link">
+                                            <i class="fa-brands fa-instagram"></i>
+                                            Instagram
+                                        </a>
+                                    </li>
+                                    <li class="footer__list-item">
+                                        <a href="" class="footer__list-item-link">
+                                            <i class="fa-brands fa-twitter"></i>
+                                            Twitter
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer__bottom">
+                        <p class="footer__bottom-text">
+                            Bản quyền thuộc ...
+                        </p>
+                    </div>
+                </div>
+            </footer>
+            </body>
+            
+            
+           
+
+            <script>
+                var swiper = new Swiper(".mySwiper", {
+                slidesPerView: 1,
+                spaceBetween: 30,
+                loop:true, 
+                // spaceBetween: 30,
+                pagination: {
+                    el: ".swiper-pagination",
+                    clickable: true,
+                },
+                    breakpoints: {
+                    1224: {
+                    slidesPerView: 3,
+                    spaceBetween: 30,
+                    },
+
+                    768: {
+                        slidesPerView: 2,
+
+                    }
+                },
+                });
+            </script>
+             <script
+             type="text/javascript"
+             src="https://code.jquery.com/jquery-1.11.0.min.js"
+             ></script>
+             <script
+             type="text/javascript"
+             src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"
+             ></script>
+             <script
+             type="text/javascript"
+             src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
+             ></script>
+             <script src="./js/main.js"></script>
+    </body>
+
+</html>

@@ -1,0 +1,80 @@
+
+
+ /* Mobile & tablet */
+
+@media (max-width: 1023px) {
+    .slider,
+    .header__list,
+    .header__search,
+    .header__notification,
+    .header__shoppingCard,
+    .products-list,
+    .header__user {
+        display: none;
+    }
+    
+    .header-bar,
+    .header-searchMobile {
+    display: block;
+        cursor: pointer;
+    }
+    .header_right,
+    .header-bar {
+        width: 20%;
+    }
+   .header_right  {
+    justify-content: end;
+   }
+   .list-product__respon-wrap {
+    display: block;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 10;
+   }
+   .slider_mb {
+    margin-top: 116px;
+    display: block;
+    }
+    .slick-prev {
+      left: 32px;
+    }
+    
+    .slick-next {
+      right: 32px;
+    }
+    .product_info_left .list-group {
+      display: none !important;
+    }
+}
+
+/* tablet */ 
+@media (min-width: 740px) and (max-width: 1023px) {
+  .navbar__mb {
+    width: 60%;
+  }
+}
+
+/* Mobile */
+
+@media (max-width:739px) {
+  .newsletter__email-wrap {
+    max-width: 300px;
+  }
+  .navbar__mb {
+    width: 320px;
+    max-width: 90%;
+  }
+  .product-suggestions__wrap {
+    display: none !important;
+  }
+  .product-reviews-vote__btn
+  .fa-truck-fast,
+  .Btn-lg,
+  .product_info__freeship span {
+    font-size: 1.5rem;
+  }
+}
+
+
