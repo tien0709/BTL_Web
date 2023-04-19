@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang chủ</title>
+    <title>LNTT laptop - "Vua" Laptop</title>
+	<meta name="description" content="Trang web bán laptop chất lượng với giá cả hợp lý.">
+	<meta name="keywords" content="laptop, mua laptop, giá laptop">
     <link rel="stylesheet" href="./icon/fontawesome-free-6.2.0-web/css/all.min.css">
     <link
     rel="stylesheet"
@@ -26,6 +28,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </head>
 <body>
+<!-- modal upload -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -38,7 +41,7 @@
         <form class="form-control" action="" method="post" enctype="multipart/form-data">
           <h3>Chọn ảnh để tải lên:</h3>
           <input type="file" name="fileToUpload" id="fileToUpload" value="Chọn hình ảnh tải lên">
-          <input class="btn btn-light btn-outline-dark" type="submit" value="Tải lên hình ảnh"  name="submit" id="buttonToUpload">
+          <input class="btn btn-light btn-outline-dark" type="submit" value="Tải lên hình ảnh"  name="submitUpLoad" id="buttonToUpload">
         </form>
       </div>
     </div>
@@ -47,6 +50,7 @@
 <?php 
 session_start();
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if(isset($_POST['submitUpLoad'])){
 if(isset($_SESSION['email'])){
 $target_dir = "uploads/";
 $target_file = $target_dir . uniqid() . '.' . pathinfo($_FILES["fileToUpload"]["name"], PATHINFO_EXTENSION);
@@ -96,8 +100,62 @@ else {
     echo "<script>" . "alert('Bạn phải đăng nhập để có thể thay đổi ảnh đại diện!');". "</script>";
 }
 }
+}
 ?>
+<!-- modal change password -->
+<div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="form-control" action="" method="post">
+          <h3>Thay đổi mật khẩu:</h3>
+          <label class="form-label" for="old_password">Mật khẩu hiện tại: </label>
+          <input type="password" class="border border-dark" name="old_password" id="old_password" value="" >
+          <label class="form-label" for="new_password">Mật khẩu mới: </label>
+          <input type="password" class="border border-dark" name="new_password" id="new_password" value="" >
+          <label class="form-label" for="new_password">Nhập lại mật khẩu mới: </label>
+          <input type="password" class="border border-dark" name="re_new_password" id="re_new_password" value="" >
+          <input class="btn btn-light btn-outline-dark" type="submit" value="Thay đổi"  name="submitChange" id="buttonToChange">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<?php 
+if($_SERVER['REQUEST_METHOD'] == 'POST') {
+  if(isset($_POST['submitChange'])){
+    if(isset($_SESSION['email'])){
+        if($_POST['old_password']!=$_SESSION['password']) echo "<script>" . "alert('Mật khẩu không chính xác!');". "</script>";
+        else if($_POST['new_password']!=$_POST['re_new_password']) echo "<script>" . "alert('Mật khẩu mới nhập lại khác mật khẩu mới!');". "</script>";
+        else{
 
+            $db = mysqli_connect('localhost','root','','shop');
+            $password = $_POST['new_password'];
+            $password = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', "", $password);
+            $email = $_SESSION['email'];
+
+            if(mysqli_query($db, "UPDATE account SET password = '$password' WHERE email = '$email'")){
+                echo "<script> 
+                alert('Thay đổi mật khẩu thành công!');
+                window.location.href = 'log_out.php';
+                </script>";//lam nhu nay de khac phuc loi "Cannot modify header information - headers already sent" xuất hiện khi trước khi gọi hàm header() để điều hướng trang, trang đã có output gửi về trình duyệt
+            }
+            else echo "<script>" . "alert('Không thể thay đổi mật khẩu !');". "</script>";
+        }
+    } 
+    else {
+        
+        echo "<script>" . "alert('Bạn phải đăng nhập để có thể thay đổi mật khẩu!');". "</script>";
+    }
+  }
+}
+?>
+<!------------------------------------------>
     <div class="main">
         <header class="header">
             <div class="container">
@@ -118,7 +176,7 @@ else {
                                     // Kiểm tra thông tin đăng nhập
                                         if($row['email']== $_SESSION['email']){
                                           echo '<script>document.getElementsByClassName("avatar-bar")[0].setAttribute("src", "./uploads/'.$row['image'].'?'.time().'");</script>';
-                                          echo "<p class='h4 pl-1' style='display:inline-block;'> " . $_SESSION['username'] . "</p>";
+                                          echo "<p class='h3 pl-1' style='display:inline-block;'> " . $_SESSION['username'] . "</p>";
                                         }
                                     }
                                 }
@@ -167,11 +225,17 @@ else {
                                     Thay ảnh đại diện
                                 </a>
                             </li>
+                            <li> 
+                                <a href="" class="navbar__mb-link" data-toggle="modal" data-target="#passwordModal">
+                                    <i class="fa-solid  fa-key minwidth25px"></i>
+                                    Đổi mật khẩu
+                                </a>
+                            </li>
                         </ul>
                     </div>
                     <div class="header_left fl">
                         <div class="header__logo">
-                            <img src="./img/lntt.png" alt="" class="logo-img">
+                            <img src="./img/lntt.png" alt="LNTT laptop" class="logo-img">
                         </div>
                         <ul class="header__list">
                             <li class="header__item"><a href="" class="header__item-link">Trang chủ</a></li>
@@ -239,6 +303,9 @@ else {
                                         Thay ảnh đại diện
                                         </a>
                                     </li>
+                                    <li class="user-log-item border_tb"><a id="changepw" class=" pe-auto minwidth25px" data-toggle="modal" data-target="#passwordModal">
+                                        Đổi mật khẩu
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -272,60 +339,60 @@ else {
         <div class="slider">
             <div class="slider-item"> 
                 <div class="slider-img">
-                    <a href="#"><img src="./img/Slider/banner 8.webp" alt=""></a>
+                    <a href="#"><img src="./img/Slider/banner 8.webp" alt="no image"></a>
                 </div>
             </div>
             <div class="slider-item"> 
                 <div class="slider-img">
-                    <a href="#"><img src="./img/Slider/banner ipad gen 9 PC-2.webp" alt=""></a>
+                    <a href="#"><img src="./img/Slider/banner ipad gen 9 PC-2.webp" alt="no image"></a>
                 </div>
             </div>
             <div class="slider-item"> 
                 <div class="slider-img">
-                    <a href="#"><img src="./img/Slider/Banner PC.webp" alt=""></a>
+                    <a href="#"><img src="./img/Slider/Banner PC.webp" alt="no image"></a>
                 </div>
             </div>
         </div>
         <div class="slider slider_mb">
             <div class="slider-item"> 
                 <div class="slider-img">
-                    <a href="#"><img src="./img/Slider/0012058_Banner MB (3).webp" alt=""></a>
+                    <a href="#"><img src="./img/Slider/0012058_Banner MB (3).webp" alt="no image"></a>
                 </div>
             </div>
             <div class="slider-item"> 
                 <div class="slider-img">
-                    <a href="#"><img src="./img/Slider/Banner MB.webp" alt=""></a>
+                    <a href="#"><img src="./img/Slider/Banner MB.webp" alt="no image"></a>
                 </div>
             </div>
             <div class="slider-item"> 
                 <div class="slider-img">
-                    <a href="#"><img src="./img/Slider/0012077_banner 8.webp" alt=""></a>
+                    <a href="#"><img src="./img/Slider/0012077_banner 8.webp" alt="no image"></a>
                 </div>
             </div>
         </div>
         <div class="container">
             <div class="products-list fl spbw">
-                <span class="products-list__name"><a href=""><img src="./img/Products/637340494668267616_Lenovo@2x.webp" alt=""></a></span>
-                <span class="products-list__name"><a href=""><img src="./img/Products/637340493755614653_MSI@2x.webp" alt=""></a></span>
-                <span class="products-list__name"><a href=""><img src="./img/Products/637619564183327279_HP@2x.webp" alt=""></a></span>
-                <span class="products-list__name"><a href=""><img src="./img/Products/637732077455069770_Asus@2x.webp" alt=""></a></span>
-                <span class="products-list__name"><a href=""><img src="./img/Products/637340494666704995_Acer@2x.webp" alt=""></a></span>
-                <span class="products-list__name"><a href=""><img src="./img/Products/637340494666861275_Dell@2x.webp" alt=""></a></span>
-                <span class="products-list__name"><a href=""><img src="./img/Products/637769104385571970_Macbook-Apple@2x.webp" alt=""></a></span>
+                <span class="products-list__name"><a href=""><img src="./img/Products/637340494668267616_Lenovo@2x.webp" alt="lenovo"></a></span>
+                <span class="products-list__name"><a href=""><img src="./img/Products/637340493755614653_MSI@2x.webp" alt="msi"></a></span>
+                <span class="products-list__name"><a href=""><img src="./img/Products/637619564183327279_HP@2x.webp" alt="hp"></a></span>
+                <span class="products-list__name"><a href=""><img src="./img/Products/637732077455069770_Asus@2x.webp" alt="asus"></a></span>
+                <span class="products-list__name"><a href=""><img src="./img/Products/637340494666704995_Acer@2x.webp" alt="acer"></a></span>
+                <span class="products-list__name"><a href=""><img src="./img/Products/637340494666861275_Dell@2x.webp" alt="dell"></a></span>
+                <span class="products-list__name"><a href=""><img src="./img/Products/637769104385571970_Macbook-Apple@2x.webp" alt="macbook"></a></span>
             </div>
             <div class="products">
                     <div class="products-wrap"  data-aos="fade-right"
                     data-aos-offset="300"
                     data-aos-easing="ease-in-sine">
                         <div>
-                            <h2 class="product-title">Sản phẩm bán chạy</h2>
+                            <h1 class="product-title">Sản phẩm bán chạy</h1>
                         </div>
                         <div class="row mt-top25">
                             <div class="col-lg-3 col-md-6 col-sm-6 ">
                                 <div class="product-item">
                                     <span class="tra-gop mt-bottom25">Trả góp 0%</span>
                                     <a href="">
-                                        <img src="./img/Products/lenovo-ideapad-3-15iau7-i3-82rk005lvn-(12).jpg" alt="" class="product-item__img pd-bottom25">
+                                        <img src="./img/Products/lenovo-ideapad-3-15iau7-i3-82rk005lvn-(12).jpg" alt="lenovo-ideapad-3-15iau7" class="product-item__img pd-bottom25">
                                     </a>
                                     <div class="rate fl">
                                         <span><i class="fa-solid fa-star fa-starActive"></i></span>
@@ -335,9 +402,9 @@ else {
                                         <span><i class="fa-solid fa-star"></i></span>
                                     </div>
                                     <a href="">
-                                        <h3 class="product-item__name">
+                                        <h2 class="product-item__name">
                                             Lenovo Ideapad 3 15IAU7 i3 1215U (82RK005LVN)
-                                        </h3>
+                                        </h2>
                                     </a>
                                     <div>
                                         <span class="product-item__desc">RAM 8GB</span> 
@@ -354,7 +421,7 @@ else {
                                 <div class="product-item">
                                     <span class="tra-gop mt-bottom25">Trả góp 0%</span>
                                     <a href="">
-                                        <img src="./img/Products/lenovo-ideapad-3-15iau7-i3-82rk005lvn-(12).jpg" alt="" class="product-item__img pd-bottom25">
+                                        <img src="./img/Products/lenovo-ideapad-3-15iau7-i3-82rk005lvn-(12).jpg" alt="lenovo-ideapad-3-15iau7" class="product-item__img pd-bottom25">
                                     </a>
                                     <div class="rate fl">
                                         <span><i class="fa-solid fa-star fa-starActive"></i></span>
@@ -364,9 +431,9 @@ else {
                                         <span><i class="fa-solid fa-star"></i></span>
                                     </div>
                                     <a href="">
-                                        <h3 class="product-item__name">
+                                        <h2 class="product-item__name">
                                             Lenovo Ideapad 3 15IAU7 i3 1215U (82RK005LVN)
-                                        </h3>
+                                        </h2>
                                     </a>
                                     <div>
                                         <span class="product-item__desc">RAM 8GB</span> 
@@ -383,7 +450,7 @@ else {
                                 <div class="product-item">
                                     <span class="tra-gop mt-bottom25">Trả góp 0%</span>
                                     <a href="">
-                                        <img src="./img/Products/lenovo-ideapad-3-15iau7-i3-82rk005lvn-(12).jpg" alt="" class="product-item__img pd-bottom25">
+                                        <img src="./img/Products/lenovo-ideapad-3-15iau7-i3-82rk005lvn-(12).jpg" alt="lenovo-ideapad-3-15iau7" class="product-item__img pd-bottom25">
                                     </a>
                                     <div class="rate fl">
                                         <span><i class="fa-solid fa-star fa-starActive"></i></span>
@@ -393,9 +460,9 @@ else {
                                         <span><i class="fa-solid fa-star"></i></span>
                                     </div>
                                     <a href="">
-                                        <h3 class="product-item__name">
+                                        <h2 class="product-item__name">
                                             Lenovo Ideapad 3 15IAU7 i3 1215U (82RK005LVN)
-                                        </h3>
+                                        </h2>
                                     </a>
                                     <div>
                                         <span class="product-item__desc">RAM 8GB</span> 
@@ -412,7 +479,7 @@ else {
                                 <div class="product-item">
                                     <span class="tra-gop mt-bottom25">Trả góp 0%</span>
                                     <a href="">
-                                        <img src="./img/Products/lenovo-ideapad-3-15iau7-i3-82rk005lvn-(12).jpg" alt="" class="product-item__img pd-bottom25">
+                                        <img src="./img/Products/lenovo-ideapad-3-15iau7-i3-82rk005lvn-(12).jpg" alt="lenovo-ideapad-3-15iau7" class="product-item__img pd-bottom25">
                                     </a>
                                     <div class="rate fl">
                                         <span><i class="fa-solid fa-star fa-starActive"></i></span>
@@ -422,9 +489,9 @@ else {
                                         <span><i class="fa-solid fa-star"></i></span>
                                     </div>
                                     <a href="">
-                                        <h3 class="product-item__name">
+                                        <h2 class="product-item__name">
                                             Lenovo Ideapad 3 15IAU7 i3 1215U (82RK005LVN)
-                                        </h3>
+                                        </h2>
                                     </a>
                                     <div>
                                         <span class="product-item__desc">RAM 8GB</span> 
@@ -443,14 +510,14 @@ else {
                     data-aos-offset="300"
                     data-aos-easing="ease-in-sine">
                         <div>
-                            <h2 class="product-title">Sản phẩm bán chạy</h2>
+                            <h1 class="product-title">Sản phẩm bán chạy</h1>
                         </div>
                         <div class="row mt-top25">
                             <div class="col-lg-3 col-md-6 col-sm-6">
                                 <div class="product-item">
                                     <span class="tra-gop mt-bottom25">Trả góp 0%</span>
                                     <a href="">
-                                        <img src="./img/Products/lenovo-ideapad-3-15iau7-i3-82rk005lvn-(12).jpg" alt="" class="product-item__img pd-bottom25">
+                                        <img src="./img/Products/lenovo-ideapad-3-15iau7-i3-82rk005lvn-(12).jpg" alt="lenovo-ideapad-3-15iau7" class="product-item__img pd-bottom25">
                                     </a>
                                     <div class="rate fl">
                                         <span><i class="fa-solid fa-star fa-starActive"></i></span>
@@ -460,9 +527,9 @@ else {
                                         <span><i class="fa-solid fa-star"></i></span>
                                     </div>
                                     <a href="">
-                                        <h3 class="product-item__name">
+                                        <h2 class="product-item__name">
                                             Lenovo Ideapad 3 15IAU7 i3 1215U (82RK005LVN)
-                                        </h3>
+                                        </h2>
                                     </a>
                                     <div>
                                         <span class="product-item__desc">RAM 8GB</span> 
@@ -479,7 +546,7 @@ else {
                                 <div class="product-item">
                                     <span class="tra-gop mt-bottom25">Trả góp 0%</span>
                                     <a href="">
-                                        <img src="./img/Products/lenovo-ideapad-3-15iau7-i3-82rk005lvn-(12).jpg" alt="" class="product-item__img pd-bottom25">
+                                        <img src="./img/Products/lenovo-ideapad-3-15iau7-i3-82rk005lvn-(12).jpg" alt="lenovo-ideapad-3-15iau7" class="product-item__img pd-bottom25">
                                     </a>
                                     <div class="rate fl">
                                         <span><i class="fa-solid fa-star fa-starActive"></i></span>
@@ -489,9 +556,9 @@ else {
                                         <span><i class="fa-solid fa-star"></i></span>
                                     </div>
                                     <a href="">
-                                        <h3 class="product-item__name">
+                                        <h2 class="product-item__name">
                                             Lenovo Ideapad 3 15IAU7 i3 1215U (82RK005LVN)
-                                        </h3>
+                                        </h2>
                                     </a>
                                     <div>
                                         <span class="product-item__desc">RAM 8GB</span> 
@@ -508,7 +575,7 @@ else {
                                 <div class="product-item">
                                     <span class="tra-gop mt-bottom25">Trả góp 0%</span>
                                     <a href="">
-                                        <img src="./img/Products/lenovo-ideapad-3-15iau7-i3-82rk005lvn-(12).jpg" alt="" class="product-item__img pd-bottom25">
+                                        <img src="./img/Products/lenovo-ideapad-3-15iau7-i3-82rk005lvn-(12).jpg" alt="lenovo-ideapad-3-15iau7" class="product-item__img pd-bottom25">
                                     </a>
                                     <div class="rate fl">
                                         <span><i class="fa-solid fa-star fa-starActive"></i></span>
@@ -518,9 +585,9 @@ else {
                                         <span><i class="fa-solid fa-star"></i></span>
                                     </div>
                                     <a href="">
-                                        <h3 class="product-item__name">
+                                        <h2 class="product-item__name">
                                             Lenovo Ideapad 3 15IAU7 i3 1215U (82RK005LVN)
-                                        </h3>
+                                        </h2>
                                     </a>
                                     <div>
                                         <span class="product-item__desc">RAM 8GB</span> 
@@ -537,7 +604,7 @@ else {
                                 <div class="product-item">
                                     <span class="tra-gop mt-bottom25">Trả góp 0%</span>
                                     <a href="">
-                                        <img src="./img/Products/lenovo-ideapad-3-15iau7-i3-82rk005lvn-(12).jpg" alt="" class="product-item__img pd-bottom25">
+                                        <img src="./img/Products/lenovo-ideapad-3-15iau7-i3-82rk005lvn-(12).jpg" alt="lenovo-ideapad-3-15iau7" class="product-item__img pd-bottom25">
                                     </a>
                                     <div class="rate fl">
                                         <span><i class="fa-solid fa-star fa-starActive"></i></span>
@@ -547,9 +614,9 @@ else {
                                         <span><i class="fa-solid fa-star"></i></span>
                                     </div>
                                     <a href="">
-                                        <h3 class="product-item__name">
+                                        <h2 class="product-item__name">
                                             Lenovo Ideapad 3 15IAU7 i3 1215U (82RK005LVN)
-                                        </h3>
+                                        </h2>
                                     </a>
                                     <div>
                                         <span class="product-item__desc">RAM 8GB</span> 
@@ -568,14 +635,14 @@ else {
                     </div>
                     <div class="products-wrap">
                         <div>
-                            <h2 class="product-title">Sản phẩm bán chạy</h2>
+                            <h1 class="product-title">Sản phẩm bán chạy</h1>
                         </div>
                         <div class="row mt-top25">
                             <div class="col-lg-3 col-md-6 col-sm-6">
                                 <div class="product-item">
                                     <span class="tra-gop mt-bottom25">Trả góp 0%</span>
                                     <a href="">
-                                        <img src="./img/Products/lenovo-ideapad-3-15iau7-i3-82rk005lvn-(12).jpg" alt="" class="product-item__img pd-bottom25">
+                                        <img src="./img/Products/lenovo-ideapad-3-15iau7-i3-82rk005lvn-(12).jpg" alt="lenovo-ideapad-3-15iau7" class="product-item__img pd-bottom25">
                                     </a>
                                     <div class="rate fl">
                                         <span><i class="fa-solid fa-star fa-starActive"></i></span>
@@ -585,9 +652,9 @@ else {
                                         <span><i class="fa-solid fa-star"></i></span>
                                     </div>
                                     <a href="">
-                                        <h3 class="product-item__name">
+                                        <h2 class="product-item__name">
                                             Lenovo Ideapad 3 15IAU7 i3 1215U (82RK005LVN)
-                                        </h3>
+                                        </h2>
                                     </a>
                                     <div>
                                         <span class="product-item__desc">RAM 8GB</span> 
@@ -604,7 +671,7 @@ else {
                                 <div class="product-item">
                                     <span class="tra-gop mt-bottom25">Trả góp 0%</span>
                                     <a href="">
-                                        <img src="./img/Products/lenovo-ideapad-3-15iau7-i3-82rk005lvn-(12).jpg" alt="" class="product-item__img pd-bottom25">
+                                        <img src="./img/Products/lenovo-ideapad-3-15iau7-i3-82rk005lvn-(12).jpg" alt="lenovo-ideapad-3-15iau7" class="product-item__img pd-bottom25">
                                     </a>
                                     <div class="rate fl">
                                         <span><i class="fa-solid fa-star fa-starActive"></i></span>
@@ -614,9 +681,9 @@ else {
                                         <span><i class="fa-solid fa-star"></i></span>
                                     </div>
                                     <a href="">
-                                        <h3 class="product-item__name">
+                                        <h2 class="product-item__name">
                                             Lenovo Ideapad 3 15IAU7 i3 1215U (82RK005LVN)
-                                        </h3>
+                                        </h2>
                                     </a>
                                     <div>
                                         <span class="product-item__desc">RAM 8GB</span> 
@@ -633,7 +700,7 @@ else {
                                 <div class="product-item">
                                     <span class="tra-gop mt-bottom25">Trả góp 0%</span>
                                     <a href="">
-                                        <img src="./img/Products/lenovo-ideapad-3-15iau7-i3-82rk005lvn-(12).jpg" alt="" class="product-item__img pd-bottom25">
+                                        <img src="./img/Products/lenovo-ideapad-3-15iau7-i3-82rk005lvn-(12).jpg" alt="lenovo-ideapad-3-15iau7" class="product-item__img pd-bottom25">
                                     </a>
                                     <div class="rate fl">
                                         <span><i class="fa-solid fa-star fa-starActive"></i></span>
@@ -643,9 +710,9 @@ else {
                                         <span><i class="fa-solid fa-star"></i></span>
                                     </div>
                                     <a href="">
-                                        <h3 class="product-item__name">
+                                        <h2 class="product-item__name">
                                             Lenovo Ideapad 3 15IAU7 i3 1215U (82RK005LVN)
-                                        </h3>
+                                        </h2>
                                     </a>
                                     <div>
                                         <span class="product-item__desc">RAM 8GB</span> 
@@ -662,7 +729,7 @@ else {
                                 <div class="product-item">
                                     <span class="tra-gop mt-bottom25">Trả góp 0%</span>
                                     <a href="">
-                                        <img src="./img/Products/lenovo-ideapad-3-15iau7-i3-82rk005lvn-(12).jpg" alt="" class="product-item__img pd-bottom25">
+                                        <img src="./img/Products/lenovo-ideapad-3-15iau7-i3-82rk005lvn-(12).jpg" alt="lenovo-ideapad-3-15iau7" class="product-item__img pd-bottom25">
                                     </a>
                                     <div class="rate fl">
                                         <span><i class="fa-solid fa-star fa-starActive"></i></span>
@@ -672,9 +739,9 @@ else {
                                         <span><i class="fa-solid fa-star"></i></span>
                                     </div>
                                     <a href="">
-                                        <h3 class="product-item__name">
+                                        <h2 class="product-item__name">
                                             Lenovo Ideapad 3 15IAU7 i3 1215U (82RK005LVN)
-                                        </h3>
+                                        </h2>
                                     </a>
                                     <div>
                                         <span class="product-item__desc">RAM 8GB</span> 
@@ -693,7 +760,7 @@ else {
         </div>
         <footer>
             <div class="newsletter">
-                <h3 class="newsletter__heading">Đăng ký nhận tin từ ...</h3>
+                <h2 class="newsletter__heading">Đăng ký nhận tin từ ...</h2>
                 <p class="newsletter__desc">Thông tin sản phẩm mới nhất và chương trình khuyến mãi</p>
                 <div class="newsletter__email fl">
                     <div class="newsletter__email-wrap fl spbw">
@@ -706,7 +773,7 @@ else {
                 <div class="container text-center">
                     <div class="row pd-bottom32">
                         <div class="col-lg-3 col-md-6 col-sm-6">
-                            <h3 class="footer__heading ">Chăm sóc khách hàng</h3>
+                            <h2 class="footer__heading ">Chăm sóc khách hàng</h2>
                             <ul class="footer__list">
                                 <li class="footer__list-item">
                                     <a href="" class="footer__list-item-link">Trung tâm trợ giúp</a>
@@ -720,7 +787,7 @@ else {
                             </ul>
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-6">
-                            <h3 class="footer__heading">Giới thiệu</h3>
+                            <h2 class="footer__heading">Giới thiệu</h2>
                             <ul class="footer__list">
                                 <li class="footer__list-item">
                                     <a href="" class="footer__list-item-link">Giới thiệu</a>
@@ -734,7 +801,7 @@ else {
                             </ul>
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-6">
-                            <h3 class="footer__heading">Chính sách</h3>
+                            <h2 class="footer__heading">Chính sách</h2>
                             <ul class="footer__list">
                                 <li class="footer__list-item">
                                     <a href="" class="footer__list-item-link">Đổi trả</a>
@@ -748,7 +815,7 @@ else {
                             </ul>
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-6">
-                            <h3 class="footer__heading">Theo dõi</h3>
+                            <h2 class="footer__heading">Theo dõi</h2>
                             <ul class="footer__list">
                                 <li class="footer__list-item">
                                     <a href="" class="footer__list-item-link">

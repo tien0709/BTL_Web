@@ -945,6 +945,9 @@ height: calc(100% - 73px);
 #select:hover{
     cursor: pointer;
 }
+#changepw:hover{
+  cursor: pointer;
+}
 .avatar{
   border-radius: 50%;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
@@ -978,8 +981,26 @@ height: calc(100% - 73px);
   font-size: 1.5em;
 }   
     
+.form-control {
+  border: 1px solid #ccc; /* Tạo viền cho khung nhập */
+  padding: 10px; /* Thêm padding để tạo khoảng cách giữa viền và nội dung */
+}
 
-
+.form-label {
+  display: block;
+  font-weight: bold; /* Làm đậm label */
+  margin-bottom: 5px; /* Thêm khoảng cách giữa các label */
+}
+ #old_password, #new_password, #re_new_password{
+  display: block;
+  min-width :200px;
+  min-height :30px;
+  margin-bottom: 1em;
+  font-size: 2em;
+ }
+ #buttonToChange{
+ font-size: 2em;
+ }
 
 
          

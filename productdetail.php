@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Macbook.com</title>
+    <title>LNTT laptop - "Vua" Laptop</title>
+	  <meta name="description" content="Trang web bán laptop chất lượng với giá cả hợp lý.">
+	  <meta name="keywords" content="laptop, mua laptop, giá laptop">
     <link rel="stylesheet" href="./icon/fontawesome-free-6.2.0-web/css/all.min.css">
     <link
     rel="stylesheet"
@@ -28,6 +30,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   </head>
 <body>
+<!-- modal upload -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -40,7 +43,7 @@
         <form class="form-control" action="" method="post" enctype="multipart/form-data">
           <h3>Chọn ảnh để tải lên:</h3>
           <input type="file" name="fileToUpload" id="fileToUpload" value="Chọn hình ảnh tải lên">
-          <input class="btn btn-light btn-outline-dark" type="submit" value="Tải lên hình ảnh"  name="submit" id="buttonToUpload">
+          <input class="btn btn-light btn-outline-dark" type="submit" value="Tải lên hình ảnh"  name="submitUpLoad" id="buttonToUpload">
         </form>
       </div>
     </div>
@@ -49,6 +52,7 @@
 <?php 
 session_start();
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if(isset($_POST['submitUpLoad'])){
 if(isset($_SESSION['email'])){
 $target_dir = "uploads/";
 $target_file = $target_dir . uniqid() . '.' . pathinfo($_FILES["fileToUpload"]["name"], PATHINFO_EXTENSION);
@@ -98,7 +102,62 @@ else {
     echo "<script>" . "alert('Bạn phải đăng nhập để có thể thay đổi ảnh đại diện!');". "</script>";
 }
 }
+}
 ?>
+<!-- modal change password -->
+<div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="form-control" action="" method="post">
+          <h3>Thay đổi mật khẩu:</h3>
+          <label class="form-label" for="old_password">Mật khẩu hiện tại: </label>
+          <input type="password" class="border border-dark" name="old_password" id="old_password" value="" >
+          <label class="form-label" for="new_password">Mật khẩu mới: </label>
+          <input type="password" class="border border-dark" name="new_password" id="new_password" value="" >
+          <label class="form-label" for="new_password">Nhập lại mật khẩu mới: </label>
+          <input type="password" class="border border-dark" name="re_new_password" id="re_new_password" value="" >
+          <input class="btn btn-light btn-outline-dark" type="submit" value="Thay đổi"  name="submitChange" id="buttonToChange">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<?php 
+if($_SERVER['REQUEST_METHOD'] == 'POST') {
+  if(isset($_POST['submitChange'])){
+    if(isset($_SESSION['email'])){
+        if($_POST['old_password']!=$_SESSION['password']) echo "<script>" . "alert('Mật khẩu không chính xác!');". "</script>";
+        else if($_POST['new_password']!=$_POST['re_new_password']) echo "<script>" . "alert('Mật khẩu mới nhập lại khác mật khẩu mới!');". "</script>";
+        else{
+
+            $db = mysqli_connect('localhost','root','','shop');
+            $password = $_POST['new_password'];
+            $password = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', "", $password);
+            $email = $_SESSION['email'];
+
+            if(mysqli_query($db, "UPDATE account SET password = '$password' WHERE email = '$email'")){
+                echo "<script> 
+                alert('Thay đổi mật khẩu thành công!');
+                window.location.href = 'log_out.php';
+                </script>";//lam nhu nay de khac phuc loi "Cannot modify header information - headers already sent" xuất hiện khi trước khi gọi hàm header() để điều hướng trang, trang đã có output gửi về trình duyệt
+            }
+            else echo "<script>" . "alert('Không thể thay đổi mật khẩu !');". "</script>";
+        }
+    } 
+    else {
+        
+        echo "<script>" . "alert('Bạn phải đăng nhập để có thể thay đổi mật khẩu!');". "</script>";
+    }
+  }
+}
+?>
+<!------------------------------------------>
     <div class="app">
         <!-- Header -->
         <header class="header">
@@ -167,6 +226,12 @@ else {
                                 <a href="#" class="navbar__mb-link" data-toggle="modal" data-target="#exampleModal">
                                    <i class="fa-solid fa-cloud-upload minwidth25px"></i>
                                     Thay ảnh đại diện
+                                </a>
+                            </li>
+                            <li> 
+                                <a href="" class="navbar__mb-link" data-toggle="modal" data-target="#passwordModal">
+                                    <i class="fa-solid  fa-key minwidth25px"></i>
+                                    Đổi mật khẩu
                                 </a>
                             </li>
                         </ul>
@@ -241,6 +306,9 @@ else {
                                         Thay ảnh đại diện
                                         </a>
                                   </li>
+                                  <li class="user-log-item border_tb"><a id="changepw" class=" pe-auto minwidth25px" data-toggle="modal" data-target="#passwordModal">
+                                        Đổi mật khẩu
+                                    </li>
                                 </ul>
                             </div>
                         </div>

@@ -39,7 +39,9 @@
   }
   if(isset($_POST['submit'])){
     $email = $_POST['email'];
+    $email = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', "", $email);
     $password = $_POST['password'];
+    $password = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', "", $password);
     $db = mysqli_connect('localhost','root','','shop');
     $sql = " SELECT * FROM account ";
     $result = mysqli_query($db,$sql);
@@ -144,7 +146,7 @@
       class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-dark my-4">
       <!-- Copyright -->
       <div class="text-white mb-3 mb-md-0">
-        Copyright © 2020. All rights reserved.
+        LNTT Laptop
       </div>
       <!-- Copyright -->
   
