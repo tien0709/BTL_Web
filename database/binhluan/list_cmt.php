@@ -1,0 +1,70 @@
+<?php
+// Kết nối đến cơ sở dữ liệu MySQL
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "webbanlap";
+
+// Tạo kết nối đến cơ sở dữ liệu
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+
+// Kiểm tra kết nối
+if (!$conn) {
+    die("Kết nối thất bại: " . mysqli_connect_error());
+}
+
+$id = isset($_GET['id']) ? $_GET['id'] : '';
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Bình luận</h1>
+        <div class="table-responsive-lg table-responsive-md table-responsive-sm">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Tên</th>
+                        <th>Số sao</th>
+                        <th>Nội dung</th>
+                        <th>Thời gian</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $sql = "SELECT cmt_id, name, rating, comment, time FROM reviews WHERE pr_id = $id";
+                    $result_sql = $conn->query($sql);
+                    if (!$result_sql) {
+                        die("Lỗi truy vấn: " . $conn->error);
+                    }
+                    while ($row = $result_sql->fetch_assoc()) {
+                        echo "<tr>";
+                        echo "<td>" . $row['name'] . "</td>";
+                        echo "<td>" . $row['rating'] . "</td>";
+                        echo "<td>" . $row['comment'] . "</td>";
+                        echo "<td>" . $row['time'] . "</td>";
+                        echo '<td><a href="binhluan.php?page_cmt=xoa&id=' . $row['cmt_id'] . '">Xóa</a></td>';
+                        echo "</tr>";
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

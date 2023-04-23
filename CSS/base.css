@@ -3,7 +3,7 @@
     --primary-color: #000;
     --white-color: #fff;
     --black-color: #000;
-    --height-header: 64px;
+    --height-header: 74px;
 }
 
 * {
@@ -27,6 +27,10 @@ html {
 
 .mt-bottom10 {
     margin-bottom: 10px !important;
+}
+
+.mt-bottom20 {
+    margin-bottom: 20px !important;
 }
 
 .pd-bottom40 {
@@ -85,7 +89,7 @@ html {
     display: none;
 }
 
-.minwidth25px {
+.min_width25px {
     min-width: 25px;
 }
   
@@ -99,3 +103,12 @@ html {
         opacity: 1;
     }
 }
+
+@keyframes slideFromLeft {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }

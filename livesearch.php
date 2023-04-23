@@ -1,5 +1,5 @@
 <?php
-$conn = mysqli_connect("localhost", "root", "", "shop");
+$conn = mysqli_connect("localhost", "root", "", "webbanlap");
 
 // Kiểm tra kết nối
 if (!$conn) {
@@ -10,28 +10,31 @@ if (!$conn) {
 $searchTerm = isset($_GET['q']) ? $_GET['q'] : '';
 $searchTerm = str_replace(' ', '', $searchTerm);
 $sql = "SELECT * FROM products WHERE LOWER(REPLACE(products_name, ' ', '')) LIKE LOWER('%$searchTerm%')";
-$result =  mysqli_query($conn,$sql);
-echo "<li>";
-echo "<p class='bg-light h3'>" ."Sản phẩm gợi ý" . "</p>";
-echo "</li>";
+$result =  mysqli_query($conn, $sql);
+echo "<div class='search-suggestions-wrap'>";
+echo "<h3>". "Sản phẩm gợi ý" . "</h3>";
 // Hiển thị kết quả
+echo "<div class = goiy>";
 if (mysqli_num_rows($result) > 0) {
-    while($row = mysqli_fetch_assoc($result)) {
-        echo "<li>";
-        echo "<img  class='w-75' src='" . $row["image"] . "' alt='" . $row["products_name"] . "'>";
-        echo "<h3>" . $row["products_name"] . "</h3>";
-        echo "<p>" . $row["description"] . "</p>";
-        echo "<p>Price: " . $row["price"] . "</p>";
-        echo "</li>";
+    while ($row = mysqli_fetch_assoc($result)) { ?>
+        <li class="d-flex">
+            <a href="productdetail.php?id=<?= $row["products_id"] ?>">
+                <img class="search-suggestions-img" src="<?= $row["image"] ?>" alt="<?= $row["products_name"] ?>">
+            </a>
+            <div class="search-suggestions-info">
+                <a href="productdetail.php?id=<?= $row["products_id"] ?>">
+                    <h4 class="search-suggestions-name"><?= $row["products_name"] ?></h4>
+                </a>
+                <p class="search-suggestions-price"><?= $row["price"] ?> ₫</p>
+            </div>
+        </li>
+<?php
     }
 } else {
     echo "Không tìm thấy sản phẩm nào";
 }
+echo "</div>";
 
 // Đóng kết nối
 mysqli_close($conn);
 ?>
-
-
-
-

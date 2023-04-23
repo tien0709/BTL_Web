@@ -23,6 +23,34 @@ $(document).ready(function(){
     document.querySelector(".navbar__mb").style.display = 'none';
   }
 
+// Search_pc
+
+  document.querySelector('.header__search').addEventListener("click" , appearOver)
+  function appearOver() {
+    document.querySelector(".over_lay").style.display = 'block';
+  }
+  document.querySelector('.over_lay').addEventListener("click" , closeOver)
+  function closeOver() {
+    document.getElementById("search-suggestions").style.display = 'none';
+    document.getElementById("search-suggestions_mb").style.display = 'none !important';
+  }
+
+
+
+
+// Search_mb
+  document.querySelector('.header-searchMobile').addEventListener("click" , appearSearch)
+  function appearSearch() {
+    document.querySelector(".over_lay").style.display = 'block';
+    document.querySelector(".searchMobile").style.display = 'block';
+  }
+
+  document.querySelector('.over_lay').addEventListener("click" , closeSearch)
+  function closeSearch() {
+    document.querySelector(".over_lay").style.display = 'none';
+    document.querySelector(".searchMobile").style.display = 'none';
+
+  }
 // Product suggestions js
   $(document).ready(function(){
     $('.product-suggestions').slick({
@@ -48,18 +76,28 @@ $(document).ready(function(){
   });
 
 
-  // Js star
-  const stars = document.querySelectorAll('.star');
-  stars.forEach(function(star, index) {
-    star.addEventListener('click', function() {
-      const rating = index + 1;
-        stars.forEach(function(s, i) {
+  // Comment
+  function setRating(value) {
+    var stars = document.querySelectorAll('.rate .star i');
+    rating = value;
+    for (var i = 0; i < stars.length; i++) {
         if (i < rating) {
-          s.classList.add('star-active');
+            stars[i].classList.add('fa-starActive');
         } else {
-          s.classList.remove('star-active');
+            stars[i].classList.remove('fa-starActive');
         }
-      });
-    });
-  });
+    }
+    document.getElementById('rating').value = rating;
+}
+
+
+
   
+
+
+
+
+
+
+
+

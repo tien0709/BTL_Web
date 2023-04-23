@@ -38,7 +38,7 @@ if ($uploadOk == 0) {
         // Lưu tên file vào cột avatar trong bảng account
         $new_name = basename($target_file);
         $sql = "UPDATE account SET image='$new_name' WHERE email = '{$_SESSION['email']}' "; // Thay đổi id tương ứng với tài khoản cần lưu avatar
-        $db = mysqli_connect('localhost','root','','shop');
+        $db = mysqli_connect('localhost','root','','webbanlap');
         mysqli_query($db, $sql);
   } else {
     echo "<script>" . "alert('có Lỗi khi upload file của bạn.');". "</script>";
