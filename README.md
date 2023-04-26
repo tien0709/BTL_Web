@@ -1,14 +1,15 @@
-# Project Name
+# Web bán hàng
 
-A web-based task management system for individuals and teams.
+Bài tập lớn về cho một hệ thống bán hàng trên nền tảng web
 
-## Getting Started
+## Mở đầu
 
-To install and run the project, follow these steps:
+Để tải và chạy dự án, thực hiện theo những bước sau:
 
-1. Clone the repository to your local machine.
-2. Install the necessary dependencies by running `npm install`.
-3. Start the development server by running `npm start`.
+1. Clone repository về máy của bạn.
+2. dán folder vào htdocs của localhost.
+3. chạy localhost
+
 
 ## Usage
 
