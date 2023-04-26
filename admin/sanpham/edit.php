@@ -40,7 +40,7 @@
 </head>
 <body>
 <div class="container">
-    <h1>Chỉnh sửa sản phẩm</h1>
+    <h1 style="text-align:center">Chỉnh sửa sản phẩm</h1>
     <form method="post">
         <div class="form-group">
             <label for="product_name">Tên sản phẩm:</label>
@@ -83,6 +83,7 @@
                 <?php } ?>
             </select>
         </div>
+        <br>
         <button type="submit" name="update_product" class="btn btn-primary">Cập nhật sản phẩm</button>
     </form>
 </div>

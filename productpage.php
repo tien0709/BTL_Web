@@ -31,9 +31,10 @@ if ($conn->connect_error) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $row_name['brand_name']; ?></title>
-    <meta name="description" content="Trang web bán laptop chất lượng với giá cả hợp lý.">
-    <meta name="keywords" content="laptop, mua laptop, giá laptop">
+    <meta name="description" content="Trang web bán laptop <?php echo $row_name['brand_name']; ?> chất lượng với giá cả hợp lý.">
+    <meta name="keywords" content="laptop <?php echo $row_name['brand_name']; ?>, mua laptop <?php echo $row_name['brand_name']; ?>, giá laptop <?php echo $row_name['brand_name']; ?>">
     <link rel="stylesheet" href="./icon/fontawesome-free-6.2.0-web/css/all.min.css">
+    <link rel="icon" href="./img/ltnn.png">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <link rel="stylesheet" href="./css/main.css">
     <link rel="stylesheet" href="./css/base.css">
@@ -76,7 +77,7 @@ $('#sx').on('change', function() {
 var jsonData = JSON.parse(data);
 
 // Tạo bảng và thêm tiêu đề
-var div = $(' <div class="row mt-top25" id="sp">');
+var div = $(' <div class="row sp-wrap" id="sp">');
 if(!jsonData.length) div.append($('<p>').text('Không có sản phẩm nào'));
 else{
 // Lặp qua các phần tử trong đối tượng và thêm các hàng vào bảng
@@ -116,7 +117,7 @@ for (var i = 0; i < jsonData.length; i++) {
 }
 }
 // Gán bảng cho phần tử HTML
-$('#sp').html(div);
+$('#ab').html(div);
         }
     });
 });
@@ -130,7 +131,7 @@ $('#sp').html(div);
                         <ul class="breadcrumb " style="align-items: center;">
                             <?php
                             $breadcrumbs = array(
-                                'Trang chủ' => 'homepage.php',
+                                'Trang chủ' => 'index.php',
                                 $row_name['brand_name'] => '#'
                             );
                             foreach ($breadcrumbs as $title => $link) {
@@ -145,8 +146,7 @@ $('#sp').html(div);
                     </div>
                 </div>
             </div>
-
-            <div class="container">
+            <div class="container" style="padding: 0 10px;">
                 <div class="products">
                     <div class="products-wrap">
                         <div class="sub-category d-flex spbw align-items-center">
@@ -168,15 +168,16 @@ $('#sp').html(div);
                             echo "Error executing query: " . $conn->error;
                         } else if ($result_product->num_rows > 0) {
                         ?>
-                            <div class="row mt-top25" id="sp">
-                                <?php
+                            <div class=" mt-top25" id="ab">
+                               <div class="row sp-wrap" id="sp">
+                               <?php
                                 while ($row_product = $result_product->fetch_assoc()) {
                                 ?>
                                     <div class="col-lg-3 col-md-6 col-sm-6">
                                         <div class="product-item">
                                             <span class="tra-gop mt-bottom25">Trả góp 0%</span>
                                             <a class="d-flex justify-content-center" href="productdetail.php?id=<?php echo $row_product['products_id']; ?>">
-                                                <img src="<?php echo $row_product['image']; ?>" width="255" height="195" alt="" class="product-item__img pd-bottom25">
+                                                <img src="<?php echo $row_product['image']; ?>" width="255" height="195" alt="no image" class="product-item__img pd-bottom25">
                                             </a>
                                             <div class="rate fl">
                                                 <?php
@@ -215,6 +216,7 @@ $('#sp').html(div);
                                 <?php
                                 }
                                 ?>
+                               </div>
                             </div>
                         <?php
                         } else {

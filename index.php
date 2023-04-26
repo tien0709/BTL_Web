@@ -15,6 +15,7 @@ if ($conn->connect_error) {
     <title>LNTT laptop - "Vua" Laptop</title>
     <meta name="description" content="Trang web bán laptop chất lượng với giá cả hợp lý.">
     <meta name="keywords" content="laptop, mua laptop, giá laptop">
+    <link rel="icon" href="./img/ltnn.png">
     <link rel="stylesheet" href="./icon/fontawesome-free-6.2.0-web/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <link rel="stylesheet" href="./css/main.css">
@@ -30,6 +31,8 @@ if ($conn->connect_error) {
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 </head>
 
 <body>
@@ -62,38 +65,38 @@ if ($conn->connect_error) {
             <div class="slider">
                 <div class="slider-item">
                     <div class="slider-img">
-                        <a href="#"><img src="./img/Slider/banner 8.webp" alt=""></a>
+                        <a href="#"><img src="./img/Slider/banner 8.webp" alt="no image"></a>
                     </div>
                 </div>
                 <div class="slider-item">
                     <div class="slider-img">
-                        <a href="#"><img src="./img/Slider/banner ipad gen 9 PC-2.webp" alt=""></a>
+                        <a href="#"><img src="./img/Slider/banner ipad gen 9 PC-2.webp" alt="no image"></a>
                     </div>
                 </div>
                 <div class="slider-item">
                     <div class="slider-img">
-                        <a href="#"><img src="./img/Slider/Banner PC.webp" alt=""></a>
+                        <a href="#"><img src="./img/Slider/Banner PC.webp" alt="no image"></a>
                     </div>
                 </div>
             </div>
             <div class="slider slider_mb">
                 <div class="slider-item">
                     <div class="slider-img">
-                        <a href="#"><img src="./img/Slider/0012058_Banner MB (3).webp" alt=""></a>
+                        <a href="#"><img src="./img/Slider/0012058_Banner MB (3).webp" alt="no image"></a>
                     </div>
                 </div>
                 <div class="slider-item">
                     <div class="slider-img">
-                        <a href="#"><img src="./img/Slider/Banner MB.webp" alt=""></a>
+                        <a href="#"><img src="./img/Slider/Banner MB.webp" alt="no image"></a>
                     </div>
                 </div>
                 <div class="slider-item">
                     <div class="slider-img">
-                        <a href="#"><img src="./img/Slider/0012077_banner 8.webp" alt=""></a>
+                        <a href="#"><img src="./img/Slider/0012077_banner 8.webp" alt="no image"></a>
                     </div>
                 </div>
             </div>
-            <div class="container">
+            <div class="container" style="padding: 0 10px;">
                 <div class="products-list fl spbw">
                     <?php
                     $sql_brand = "SELECT brand_image, brand_id FROM brands";
@@ -103,7 +106,7 @@ if ($conn->connect_error) {
 
                             <span class="products-list__name">
                                 <a href="productpage.php?id=<?php echo $row['brand_id']; ?>">
-                                    <img src="<?php echo $row['brand_image'] ?>">
+                                    <img src="<?php echo $row['brand_image'] ?>" alt="no image">
                                 </a>
                             </span>
                     <?php
@@ -134,7 +137,7 @@ if ($conn->connect_error) {
                                                 <div class="product-item">
                                                     <span class="tra-gop mt-bottom25">Trả góp 0%</span>
                                                     <a href="productdetail.php?id=<?php echo $row_product["products_id"] ?> " class="d-flex justify-content-center">
-                                                        <img src="<?php echo  $row_product["image"] ?>" width="255" height="195" alt="" class="product-item__img pd-bottom25">
+                                                        <img src="<?php echo  $row_product["image"] ?>" width="255" height="195" alt="no image" class="product-item__img pd-bottom25">
                                                     </a>
                                                     <div class="rate fl">
                                                         <?php
@@ -200,6 +203,9 @@ if ($conn->connect_error) {
     <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script src="./js/main.js"></script>
+    <script>
+        AOS.init();
+    </script>
 </body>
 
 </html>

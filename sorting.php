@@ -11,7 +11,7 @@ if (!$conn) {
 $brand_id =   $_POST["id"];
 // Lấy dữ liệu từ database
 if($_POST['type']=='asc') $sql = "SELECT * FROM products WHERE brand_id = $brand_id   ORDER BY price ASC";
-else if ($_POST['type']=='esc') $sql = "SELECT * FROM products WHERE brand_id = $brand_id  ORDER BY price DESC";
+else if ($_POST['type']=='des') $sql = "SELECT * FROM products WHERE brand_id = $brand_id  ORDER BY price DESC";
 else $sql = "SELECT * FROM products WHERE brand_id =  $brand_id  ";
 $result = mysqli_query($conn, $sql);
 

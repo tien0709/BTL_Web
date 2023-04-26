@@ -16,6 +16,6 @@ session_unset();
 session_destroy();
 
 // Chuyển hướng người dùng đến trang đăng nhập hoặc trang chính
-header("Location: homepage.php");
+header("Location: index.php");
 exit;
 ?>

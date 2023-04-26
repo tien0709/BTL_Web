@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="icon" href="./img/ltnn.png">
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -38,7 +39,7 @@
   <?php
   session_start();
   if (isset($_SESSION['email'])) {
-    header("location: homepage.php");
+    header("location: index.php");
     exit;
   }
   if (isset($_POST['submit'])) {
@@ -61,7 +62,7 @@
         $_SESSION['password'] = $password;
 
         // Chuyển hướng người dùng đến trang info.php
-        header("Location: homepage.php");
+        header("Location: index.php");
         exit; //dung chuong trinh
       }
     }
@@ -91,11 +92,11 @@
   <section class="vh-100">
     <div class="container h-custom">
       <div class="row d-flex justify-content-center align-items-center h-100 py-4">
-        <P class="h1">Đăng Nhập</P>
+        <p class="h1">Đăng Nhập</p>
       </div>
       <div class="row d-flex justify-content-center align-items-center h-100 py-4">
         <div class="col-lg-8 col-md-6">
-          <img src="draw2.webp" class="img-fluid" alt="Sample image">
+          <img src="./img/draw2.webp" class="img-fluid" alt="Sample image">
         </div>
         <div class="col-lg-4 col-md-6">
           <form method="post">
@@ -138,12 +139,6 @@
 
           </form>
         </div>
-      </div>
-    </div>
-    <div class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-dark" style="position: fixed; bottom: 0; right: 0; left: 0;">
-      <!-- Copyright -->
-      <div class="text-white mb-md-0" style="width: 100%; font-size:18px">
-        LNTT Laptop
       </div>
     </div>
   </section>

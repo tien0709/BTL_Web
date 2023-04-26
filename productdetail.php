@@ -6,7 +6,6 @@ $conn = new mysqli("localhost", "root", "", "webbanlap");
 if ($conn->connect_error) {
   die("Kết nối thất bại: " . $conn->connect_error);
 }
-global $id;
 $id = isset($_GET['id']) ? $_GET['id'] : '';
 $id_cmt = $id;
 $sql = "SELECT brand_id, products_name, image_desc_1,image_desc_2, image_desc_3, price, discount FROM products WHERE products_id = $id";
@@ -49,9 +48,10 @@ if ($result_rating_avg && $result_rating_avg->num_rows > 0) {
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?php echo $row_name['products_name'] ?></title>
-  <meta name="description" content="Trang web bán laptop chất lượng với giá cả hợp lý.">
-  <meta name="keywords" content="laptop, mua laptop, giá laptop">
+  <meta name="description" content="Trang web bán laptop <?php echo $row_name['products_name'] ?> chất lượng với giá cả hợp lý.">
+  <meta name="keywords" content="laptop, mua laptop <?php echo $row_name['products_name'] ?>, giá laptop <?php echo $row_name['products_name'] ?>">
   <link rel="stylesheet" href="./icon/fontawesome-free-6.2.0-web/css/all.min.css">
+  <link rel="icon" href="./img/ltnn.png">
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
   <link rel="stylesheet" href="./css/main.css">
   <link rel="stylesheet" href="./css/base.css">
@@ -83,7 +83,7 @@ if ($result_rating_avg && $result_rating_avg->num_rows > 0) {
               <ul class="breadcrumb">
                 <?php
                 $breadcrumbs = array(
-                  'Trang chủ' => 'homepage.php',
+                  'Trang chủ' => 'index.php',
                   $row_brand_name['brand_name'] => "productpage.php?id={$row_name['brand_id']}",
                 );
                 foreach ($breadcrumbs as $title => $link) {
@@ -94,7 +94,7 @@ if ($result_rating_avg && $result_rating_avg->num_rows > 0) {
             </div>
           </div>
         </div>
-        <div class="container">
+        <div class="container" style="padding: 0 10px;">
           <!-- Products info -->
           <div class="row gx-5 product_info product-section">
             <div class="col-lg-6 col-md-12  rounded product_info_left">
@@ -347,7 +347,7 @@ if ($result_rating_avg && $result_rating_avg->num_rows > 0) {
                 <div class="product-item product-suggestions-item">
                   <span class="tra-gop mt-bottom25">Trả góp 0%</span>
                   <a href="productdetail.php?id=<?php echo $$row_products_random['products_id']; ?>">
-                    <img src="<?php echo $row_products_random['image'] ?>" alt="" class="product-item__img pd-bottom25" style="margin:0 auto;">
+                    <img src="<?php echo $row_products_random['image'] ?>" alt="no image" class="product-item__img pd-bottom25" style="margin:0 auto;">
                   </a>
                   <div class="rate fl">
                     <?php
@@ -461,13 +461,10 @@ if ($result_rating_avg && $result_rating_avg->num_rows > 0) {
                   ?>
                 </div>
               </div>
-              <div id="success-message" style="display:none">
-                Đánh giá của bạn đã được gửi thành công!
-              </div>
               <div class="row">
                 <div class="product-reviews-vote">
                   <h3>Viết đánh giá riêng của bạn</h3>
-                  <form action="" method="POST">
+                  <form action="" method="POST" id="myForm">
                     <input type="hidden" name="product_id" value="<?php echo $id ?>" required>
                     <div class="product-reviews-vote__star d-flex align-items-center mt-bottom10">
                       <span>Chất lượng*: </span>
@@ -489,7 +486,6 @@ if ($result_rating_avg && $result_rating_avg->num_rows > 0) {
                   <input type="submit" class="Btn product-reviews-vote__btn" value="Gửi" id="submit-btn"></input>
                 </div>
                 </form>
-                <!--  -->
                 <?php
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                   if (isset($_SESSION['email'])) {
@@ -502,21 +498,23 @@ if ($result_rating_avg && $result_rating_avg->num_rows > 0) {
                     // Thực hiện truy vấn để thêm dữ liệu vào bảng
                     $sql = "INSERT INTO reviews (name, comment, rating, pr_id, time) VALUES ('$name', '$comment', '$rating','$id', NOW())";
                     if (mysqli_query($conn, $sql)) {
-                      echo "Đánh giá đã được gửi thành công.";
+                      echo "<script>" .
+                        "alert('Cảm ơn bạn đã gửi đánh giá');" .
+                        "document.getElementById('myForm').reset();" .
+                        "window.location.href = window.location.href;" .
+                        "</script>";
                     } else {
-
                       echo "Lỗi: " . mysqli_error($conn);
                     }
                   } else {
                     echo "<script>" .
                       "alert('Bạn phải đăng nhập');" .
+                      "document.getElementById('myForm').reset();" .
+                      "window.location.href = window.location.href;" .
                       "</script>";
                   }
                 }
-
-                // Đóng kết nối
                 ?>
-                <!--  -->
               </div>
             </div>
             <div class="col-lg-6 product_review_cmt_list">
@@ -544,7 +542,7 @@ if ($result_rating_avg && $result_rating_avg->num_rows > 0) {
                     <div class="product_review_cmt_item ">
                       <div class="product_review_cmt-title">
                         <div class="product_review_cmt-title-wrap d-flex align-items-center">
-                          <img src="./img/category/24-248253_user-profile-default-image-png-clipart-png-download.png" alt="" class="avt-review">
+                          <img src="./img/category/24-248253_user-profile-default-image-png-clipart-png-download.png" alt="no image" class="avt-review">
                           <p class="name-review"><?php echo $row['name']; ?></p>
                           <div class="date-review"> - <?php echo $row['time']; ?></div>
                         </div>
@@ -597,8 +595,8 @@ if ($result_rating_avg && $result_rating_avg->num_rows > 0) {
         </div>
       </div>
     </div>
-      
-      <!-- Footer -->
+
+    <!-- Footer -->
     <?php
     include("pages/footer.php")
     ?>

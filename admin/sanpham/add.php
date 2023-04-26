@@ -12,9 +12,9 @@
         $product_discount = $_POST['discount'];
         $product_description = $_POST['description'];
         $brand_id = $_POST['brand_id'];
-
+        $rating_tb = $_POST['rating_tb'];
         // Thực hiện thêm sản phẩm vào cơ sở dữ liệu
-        $add_query = mysqli_query($mysqli, "INSERT INTO products (products_name, image, price, description, brand_id, discount,image_desc_1,image_desc_2,image_desc_3) VALUES ('$product_name', '$product_image', '$product_price', '$product_description', '$brand_id' ,' $product_discount','$product_image_desc_1','$product_image_desc_2','$product_image_desc_3')");
+        $add_query = mysqli_query($mysqli, "INSERT INTO products (products_name, image, price, description, brand_id, discount,image_desc_1,image_desc_2,image_desc_3,rating_tb) VALUES ('$product_name', '$product_image', '$product_price', '$product_description', '$brand_id' ,' $product_discount','$product_image_desc_1','$product_image_desc_2','$product_image_desc_3','$rating_tb')");
 
         if($add_query) {
             echo "Thêm sản phẩm thành công!";
@@ -38,7 +38,7 @@
 </head>
 <body>
 <div class="container">
-    <h1>Thêm sản phẩm mới</h1>
+    <h1 style="text-align:center">Thêm sản phẩm mới</h1>
     <form method="post">
         <div class="form-group">
             <label for="product_name">Tên sản phẩm:</label>
@@ -80,6 +80,10 @@
                     <option value="<?php echo $brand_row['brand_id']; ?>"><?php echo $brand_row['brand_name']; ?></option>
                 <?php } ?>
             </select>
+        </div>
+        <div class="form-group">
+            <label for="rating_tb">Sao trung bình:</label>
+            <input type="text" class="form-control" name="rating_tb" value="0">
         </div>
         <button type="submit" name="add_product" class="btn btn-primary">Thêm sản phẩm</button>
     </form>

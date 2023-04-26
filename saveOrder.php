@@ -30,7 +30,7 @@ if (sizeof($error)) {
     setcookie("cart", "", time() + (60 * 15), "/");
 
 
-    header("Location: ./homepage.php");
+    header("Location: ./index.php");
 }
 
 

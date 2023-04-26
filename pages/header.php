@@ -158,6 +158,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 Đăng nhập
                             </a>
                         </li>
+                        <li>
+                            <a href="../cart.php" class="navbar__mb-link">
+                                <i class="fa-solid fa-right-to-bracket min_width25px"></i>
+                                Giỏ hàng
+                            </a>
+                        </li>
+                        <li>
+                            <a href="search_order.php" class="navbar__mb-link">
+                                <i class="fa-solid fa-right-to-bracket min_width25px"></i>
+                                Tra cứu đơn hàng
+                            </a>
+                        </li>
+
                     <?php
                     }
                     ?>
@@ -167,7 +180,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <?php
                         if ($_SESSION['username'] == 'Admin') { ?>
                             <li>
-                                <a href="./database/sanpham/sanpham.php" class="navbar__mb-link">
+                                <a href="./admin/quanli.php" class="navbar__mb-link">
                                     <i class="fa-solid fa-lock min_width25px"></i>
                                     Quản lí
                                 </a>
@@ -188,9 +201,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="navbar__mb-link" data-toggle="modal" data-target="#exampleModal">
+                            <a href="../cart.php" class="navbar__mb-link">
                                 <i class="fa-solid fa-cart-shopping min_width25px"></i>
                                 Giỏ hàng
+                            </a>
+                        </li>
+                        <li>
+                            <a href="search_order.php" class="navbar__mb-link">
+                                <i class="fa-solid fa-right-to-bracket min_width25px"></i>
+                                Tra cứu đơn hàng
                             </a>
                         </li>
 
@@ -206,12 +225,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </ul>
                 <ul class="navbar__mb-list ">
                     <li>
-                        <a href="homepage.php" class="navbar__mb-link">
+                        <a href="index.php" class="navbar__mb-link">
                             <i class="fa-solid fa-house min_width25px"></i>
                             Trang chủ
                         </a>
                     </li>
-                    <li> <a href="" class="navbar__mb-link">
+                    <li> <a href="intro.php" class="navbar__mb-link">
                             <i class="fa-solid fa-circle-info min_width25px"></i>
                             Giới thiệu
                         </a>
@@ -226,13 +245,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
             <div class="header_left fl">
                 <div class="header__logo">
-                    <a href="homepage.php">
+                    <a href="index.php">
                         <img src="./img/ltnn.png" alt="" class="logo-img">
                     </a>
                 </div>
                 <ul class="header__list">
-                    <li class="header__item"><a href="homepage.php" class="header__item-link">Trang chủ</a></li>
-                    <li class="header__item"><a href="" class="header__item-link">Giới thiệu</a></li>
+                    <li class="header__item"><a href="index.php" class="header__item-link">Trang chủ</a></li>
+                    <li class="header__item"><a href="intro.php" class="header__item-link">Giới thiệu</a></li>
                     <li class="header__item"><a href="blog_list.php" class="header__item-link">Tin tức</a></li>
                 </ul>
             </div>
@@ -271,7 +290,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <i class="fa-solid fa-bell"></i>
                 </div>
                 <div class="header__shoppingCard">
-                <a href="cart.php" target="_blank" style="background: black;" type="submit"><i class="fa-solid fa-cart-shopping header__shoppingCard-icon" style="position: relative;"><span id="quantity" style="font-size: 15px; color: red; border-radius: 100%; position: absolute; right: -5px; bottom: -5px;"><?php if(isset($_COOKIE["cart"])){echo "•";}else{echo "";}?></span></i></a>
+                <a href="./cart.php" target="_blank" style="background: black;" type="submit"><i class="fa-solid fa-cart-shopping header__shoppingCard-icon" style="position: relative;"><span id="quantity" style="font-size: 15px; color: red; border-radius: 100%; position: absolute; right: -5px; bottom: -5px;"><?php if(isset($_COOKIE["cart"])){echo "•";}else{echo "";}?></span></i></a>
                 </div>
                 <div class="header__user">
                     <img src="./uploads/avatar.jpg" class="avatar" alt="no image">
@@ -305,7 +324,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <?php
                                 if ($_SESSION['username'] == 'Admin') { ?>
                                     <li class="user-log-item border_tb">
-                                        <a id="admin" href="./database/sanpham/sanpham.php" class=" pe-auto min_width25px text-dark">
+                                        <a id="admin" href="./admin/quanli.php" class=" pe-auto min_width25px text-dark">
                                             Quản lí
                                         </a>
                                     </li>

@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Giỏ hàng</title>
+    <link rel="icon" href="./img/ltnn.png">
     <link rel="stylesheet" href="./icon/fontawesome-free-6.2.0-web/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <link rel="stylesheet" href="./css/main.css">
@@ -20,7 +21,7 @@
     <script src="https://kit.fontawesome.com/e26d989c97.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
- 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="app">
@@ -34,7 +35,7 @@
                     <div class="col-lg-2">
                     </div>
                       <ul class="breadcrumb col-lg-8">
-                        <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                        <li class="breadcrumb-item"><a href="index.php">Trang chủ</a></li>
                         <li class="breadcrumb-item"><a href="#">Giỏ hàng</a></li>
                     </ul>  
                     <div class="col-lg-2">
@@ -62,7 +63,7 @@
                                 ?>
                                 <div class="row order-product">
                                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 order-product__img">
-                                    <img src="<?php echo $c->product->image;?>" alt=""></a>
+                                    <img src="<?php echo $c->product->image;?>" alt="no image"></a>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 order-product__name">
                                     <a href=""><?php echo $c->product->products_name;?></a>

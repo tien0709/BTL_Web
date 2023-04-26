@@ -36,8 +36,6 @@ $(document).ready(function(){
   }
 
 
-
-
 // Search_mb
   document.querySelector('.header-searchMobile').addEventListener("click" , appearSearch)
   function appearSearch() {

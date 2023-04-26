@@ -505,6 +505,7 @@ textarea {
 
   .newsletter__desc {
     padding: 8px;
+    text-align: center;
   }
 
   .newsletter__email {
@@ -972,6 +973,7 @@ textarea {
 
 .product-sorting select {
   padding: 10px;
+  outline: none;
 }
 .product-sorting select option {
   display: block;
