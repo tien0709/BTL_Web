@@ -38,10 +38,6 @@ Administrative users can log in to the system . The default username is "Admin",
 - Checkout and place orders
 - Administrative interface for managing products, orders, and customers, comments
 
-## Contributing
-
-We welcome contributions from the community. To submit a bug report or feature request, please open an issue on GitHub. If you would like to contribute code changes, please follow the guidelines in CONTRIBUTING.md.
-
 ## License
 
 This project is released under the MIT License. See LICENSE for more details.
