@@ -1,7 +1,7 @@
 # Project Name
 
 Laptop Store - A web-based system for selling laptops.
-
+(https://github.com/tien0709/BTL_Web/blob/f6f33ee580285c6f23691de4e5a99c7039911e69/image.png)</br>
 ## Description
 
 This project is a web-based application that allows customers to browse and purchase laptops online. The system consists of a web interface for customers to view available products, add products to their cart, and checkout. It also includes an administrative interface for managing products, orders, and customers.
